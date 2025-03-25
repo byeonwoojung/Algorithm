@@ -1,5 +1,6 @@
-def d(card1, card2):
-    return abs(card1[0] - card2[0]) + abs(card1[1] - card2[1])
+# 2020 카카오 인턴십 키패드
+def d(p, q):
+    return abs(p[0] - q[0]) + abs(p[1] - q[1])
     
 def solution(numbers, hand):
     answer = ''    
@@ -15,13 +16,14 @@ def solution(numbers, hand):
     
     
     for num in numbers:
-        if num % 3 == 1:
+        if num % 3 == 1: # 1,4,7
             answer += 'L'
             left_loc = num
-        elif num % 3 == 0 and num != 0:
+        elif num % 3 == 0 and num != 0: # 3,6,9
             answer += 'R'
             right_loc = num
-        elif 0 <= num <= 9 or num=='*' or num=='#':
+        elif 0 <= num <= 9 or num=='*' or num=='#': # 2,5,8,0, *,#
+            # 거리 같을 때
             if d(num_loc[num], num_loc[left_loc]) == d(num_loc[num], num_loc[right_loc]):
                 if hand == 'left':
                     answer += 'L'
@@ -30,9 +32,13 @@ def solution(numbers, hand):
                 else:
                     answer += 'R'
                     right_loc = num
+            
+            # 왼손에서의 거리가 더 짧을 때
             elif d(num_loc[num], num_loc[left_loc]) < d(num_loc[num], num_loc[right_loc]):
                 answer += 'L'
                 left_loc = num
+            
+            # 오른손에서의 거리가 더 짧을 때
             else:
                 answer += 'R'
                 right_loc = num
