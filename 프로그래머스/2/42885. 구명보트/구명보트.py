@@ -1,26 +1,16 @@
-# 프로그래머스 lv2. 구명보트
-# 최대 2명만 태울 수 있다는 조건 중요!!
-# 1) 가장 무거운 사람과 가장 가벼운 사람을 함께 태운다.
-# 2) 가장 무거운 사람과 가장 가벼운 사람이 함께 태우지 못하면 가장 무거운 사람은 혼자 태워 보낸다.
-
 def solution(people, limit):
-    answer = 0  # 필요한 구명보트 개수
-    people.sort(reverse=True)  # 내림차순 정렬
-
-    start, end = 0, len(people) - 1  # 가장 무거운 사람과 가장 가벼운 사람
-
-    while start <= end:
-        # 두 사람의 무게 합이 limit 이하라면 함께 태움
+    answer = 0
+    start = 0
+    end = len(people) - 1
+    
+    people.sort() # 오름차순 정렬
+    
+    while(start <= end):
         if people[start] + people[end] <= limit:
-            end -= 1   # 가벼운 사람 업데이트
-
-        # 무거운 사람은 항상 업데이트 (혼자 떠나보내도 됨)
-        # 두 사람의 무게 합이 limit 이하가 아니면 현재 가장 가벼운 사람은 업데이트 되는 가장 무거운 사람과 합쳐봐야 함
-        start += 1
-        
-        # 1) 가장 무거운 사람 혼자 태우거나(가장 가벼운 사람은 그 다음으로 무거운 사람과 합쳐봐야 함)
-        # 2) 가장 무거운 사람과 가장 가벼운 사람 둘을 같이 태우거나
-        # 어떠한 상황이든 다음 구명보트로 넘어가야 함
+            start += 1
+            end -= 1
+        else:
+            end -= 1
         answer += 1
 
     return answer
