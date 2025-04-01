@@ -20,12 +20,14 @@ def dijk(start, n, graph):
     while queue:
         dist, now = heapq.heappop(queue)
 
+				# dist가 현재 최소 fate보다 더 크면 의미가 없으므로 continue
         if fare[now] < dist:
             continue
 
-        for node, now_fare in graph[now]:
-            cost = dist + now_fare
-            if cost < fare[node]:
+				# 연결된 점과 거리를 가져와서
+        for node, next_fare in graph[now]:
+            cost = dist + next_fare # 예상 요금
+            if cost < fare[node]:   # 예상 요금이 더 작으면 업데이트, 우선순위큐에 넣음
                 fare[node] = cost
                 heapq.heappush(queue, (cost, node))
     
