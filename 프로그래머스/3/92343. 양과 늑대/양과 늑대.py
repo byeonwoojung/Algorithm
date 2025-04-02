@@ -28,7 +28,7 @@ def solution(info, edges):
     for s, e in edges:
         node_tree[s].append(e)
 
-    # [0번 노드, 연결된 노드들, 양 1마리, 늑대 1마리]를 넣어 초기화
+    # [0번 노드, 연결된 노드들, 양 1마리, 늑대 0마리]를 넣어 초기화
     queue = deque([[0, node_tree[0], 1, 0]])
 
     while queue:
@@ -45,7 +45,7 @@ def solution(info, edges):
                 # 현재 모아온 양의 수가 다음 늑대의 수(현재 늑대의 수 + 1)보다 크면
                 if num_sheep > num_wolf + 1:
                     # 늑대 있는 곳으로 일단 가서 (num_wolf + 1)
-                    # 지금 늑대 있는 곳으로 가기 전의 노드에서 그 전에 방문했던 노드들과 다른 연결된 노드들, 지금 양 있는 곳에서 연결된 노드들을 모두 같이 넣어줌
+                    # 지금 늑대 있는 곳으로 가기 전의 노드에서 그 전에 방문했던 노드들과 다른 연결된 노드들, 지금 늑대 있는 곳에서 연결된 노드들을 모두 같이 넣어줌
                     queue.append([node, move_nodes[:i] + move_nodes[i+1:] + node_tree[node], num_sheep, num_wolf + 1])
             
             # 양이 있다면 
