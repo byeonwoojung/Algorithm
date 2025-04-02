@@ -5,17 +5,6 @@
 
 
 from collections import deque
-
-def dfs():
-    nodes, max_sheep = stack.pop()
-    for node in nodes:
-        if info[node] == 0:
-            max_sheep += 1
-    node_max_sheep[node] = max_sheep
-        
-    stack.append(stack)
-    
-    return 
     
 
 # info : 각 i번째 노드에 양(0) 또는 늑대(1)가 있음(리스트)
